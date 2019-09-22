@@ -11,6 +11,10 @@ c.	copy into authorized_key file on remote server (agent node) and check connect
 # sudo useradd -d /var/lib/jenkins jenkins
 # sudo mkdir /var/lib/jenkins/.ssh
 -	Copy the public key in authorized_key file of jenkins user. Please note that this public/private key pair should be generated on master so that while launching the agent via ssh you can provide private key in jenkins console.
+
+- Execute following command on docker agent node
+#	Install docker on machine using sudo or root(this should be treated as agent)
+# Also install java, wget etc. using yum
 # sudo groupadd docker
 # sudo gpasswd -a jenkins docker
 # systemctl status docker
@@ -20,8 +24,9 @@ Password:
 -	[jenkins@docker ~]$ docker images ls
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 
-NOTE: if still getting error and not able to execute docker pipeline from Jenkins. Execute this command on agent: sudo chmod 777 /var/run/docker.sock
-4.	Install docker on machine (this should be treated as agent)
-5.	Also install java, wget etc. using yum
+NOTE: if still getting error and not able to execute docker pipeline from Jenkins. Execute this command on agent: 
+#sudo chmod 777 /var/run/docker.sock
+
+At this point we believe that our remote agent setup is ready. Now login to Jenkins console and naviagte through following:
 6.	On Jenkins -> Manage plugins -> configure system -> set docker label (this should be same what you mentioned in the pipeline)
 7.	Test the agent node from Jenkins console. 
